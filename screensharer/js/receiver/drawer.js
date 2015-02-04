@@ -2,7 +2,7 @@
     var Drawer;
     Drawer = {};
     var apihost = window.api_host || "http://" + window.location.host;
-    loadStyle(apihost + "/drawer/style/drawer.css");
+    loadStyle(apihost + "/screensharer/style/drawer.css");
     var $ = jQuery;
     Drawer.init = function () {
         // create cavas

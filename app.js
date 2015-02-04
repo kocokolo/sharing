@@ -19,7 +19,8 @@
         res.sendfile(__dirname + '/' + file);
     });
 
-    sio.of('/drawer').on('connection', function (socket) {
+    // socket
+    sio.of('/screensharer').on('connection', function (socket) {
         var cid = ++clientUId;
         console.log(cid + " connected.");
         socket.on('pen', function (data) {
@@ -43,7 +44,7 @@
 
     });
 
-    sio.of('/image').on('connection', function (client) {
+    sio.of('/painter').on('connection', function (client) {
         var cid = ++clientUId;
 
         client.on('image', function (data) {

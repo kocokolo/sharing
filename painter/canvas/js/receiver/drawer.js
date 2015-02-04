@@ -10,7 +10,9 @@
         // init cavas
         Drawer.ctx = Drawer.canvas.getContext("2d");
         Drawer.ctx.fillStyle = "solid";
+
         Drawer.ctx.strokeStyle = "blue";
+
         Drawer.ctx.lineWidth = 10;
         Drawer.ctx.lineCap = "round";
         Drawer.socket = window.mysocket;
@@ -29,7 +31,6 @@
             }
         });
 
-
         console.info("init canvas ready!");
     };
 
@@ -37,14 +38,13 @@
         Drawer.init();
     });
 
-    // 1111
-    $("#btnSend").on("touchstart", function () {
-        var image=Drawer.canvas.toDataURL();
-        alert(11)
+    // 发送
+    window.aaa=function () {
+        var image = Drawer.canvas.toDataURL();
         mysocket.emit("image", {
-            image:image,
-            userName:"崔鹏"
+            image: image,
+            userName: "崔鹏"
         });
-    });
+    };
 
 }).call(this);

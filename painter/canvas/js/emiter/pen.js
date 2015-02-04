@@ -18,5 +18,4 @@ $(document).ready(function () {
         });
         console.info("init pen ready!");
     }, 100);
-
 });
