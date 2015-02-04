@@ -1,0 +1,16 @@
+{
+  "dependences": {
+    "express": "3.3.x",
+    "socket.io": "0.9.x"
+  },
+  "devDependencies": {
+    "gulp": "3.5.x",
+    "gulp-concat": "~2.1.x",
+    "gulp-connect": "~2.0.5",
+    "gulp-jshint": "~1.5.1",
+    "gulp-replace": "^0.4.0",
+    "gulp-size": "~0.4.0",
+    "gulp-uglify": "~0.2.x",
+    "gulp-util": "~2.2.x"
+  }
+}

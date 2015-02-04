@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body{
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+<p style="color: blue;font-size:12px;">拷贝一下代码到浏览器输入框，先别回车，先检查一下~</p>
+<script>
+    function getDrawerApi() {
+        return ['<b>javascript:</b>(function(){',
+            '   window.api_host="http://' + window.location.host + "\";",
+            '   window.api_ip="' + window.location.hostname+ "\";",
+            '   window.api_port="' + window.location.port + "\";",
+            '   var s = document.createElement("script");',
+            '   s.src = api_host+"/drawer/api.js";',
+            '   document.body.appendChild(s);',
+            '})();'].join("").replace(/\r/,"");
+    }
+    document.write(getDrawerApi())
+</script>
+<p style="color: blue;font-size:12px;"><b>注意：</b>“javascript:”前缀浏览器可能处于安全考虑会自动过滤掉，请检查并手工加上。</p>
+</body>
+</html>
