@@ -27,5 +27,5 @@
         });
     }
 
-    startSocket(/\/screensharer\//i.test(window.location.href) ? "screensharer" : "painter");
+    startSocket(/\/painter\//i.test(window.location.href) ? "painter" : "screensharer");
 })();

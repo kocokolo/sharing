@@ -11,6 +11,7 @@ $(document).ready(function () {
             var d = {
                 x: x,
                 y: y,
+                page: window.location.host,
                 type: type
             };
             $(window).trigger('pen', d);

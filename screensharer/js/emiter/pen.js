@@ -23,7 +23,6 @@
                         break;
                     case touchStopEvent:
                         type = "end";
-                        isplaying = false;
                         break;
                 }
                 if (isplaying) {
@@ -33,13 +32,19 @@
                     senddata = {
                         x: x,
                         y: y,
+                        page: window.location.host,
                         type: type
                     }
                     mysocket.emit('pen', senddata);
-                    $(window).trigger('pen', senddata);
+                    // todo
+                    //$(window).trigger('pen', senddata);
+                }
+                if (type == "end") {
+                    isplaying = false;
                 }
                 oe.preventDefault();
             });
+            mysocket.emit('i am client', window.location.hostname);
             console.info("init pen ready!");
         }, 100);
     });
