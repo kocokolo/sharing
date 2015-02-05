@@ -10,7 +10,7 @@
         _master = null,
         clientUId = 0;
 
-
+    // http request
     app.get('/', function (req, res) {
         res.sendfile(__dirname + '/index.html');
     });
@@ -23,15 +23,13 @@
     // socket
     var sharerclients = {};
     var nowpaintingclient = {};
-    sio.of('/screensharer').on('connection', function (socket) {
-        var cid = ++clientUId
-            , curclient = socket;
-
+    sio.of('/screensharer').on('connection', function (curclient) {
+        var cid = ++clientUId;
         curclient.on('i am client', function (page) {
             curclient.page = page;
             curclient.cid = cid;
             sharerclients[cid] = curclient;
-            console.log(" hello client " + cid + " from " + page);
+            console.log("" + cid + " come  from " + page);
         });
 
         curclient.on('pen', function (data) {
@@ -67,31 +65,31 @@
         curclient.on('disconnect', function () {
             delete sharerclients[curclient.cid];
             delete nowpaintingclient[curclient.page];
-            console.log(cid + " leaved.");
+            console.log(cid + " leave.");
         });
 
     });
 
-    sio.of('/painter').on('connection', function (client) {
+    sio.of('/painter').on('connection', function (curclient) {
         var cid = ++clientUId;
 
-        client.on('image', function (data) {
+        curclient.on('image', function (data) {
             if (_master) {
-                console.log(data.userName + "sub image to master....");
                 _master.emit("subimage", {
                     image: data.image,
                     userName: data.userName,
                     clientId: cid
                 });
+                console.log(data.userName + "sub image to master....");
             }
         });
 
-        client.on('i am master', function (data) {
-            _master = client;
+        curclient.on('i am master', function (data) {
+            _master = curclient;
             console.log(" welcome master.");
         });
 
-        client.on('disconnect', function () {
+        curclient.on('disconnect', function () {
             if (_master) {
                 _master.emit("clientleave", {
                     clientId: cid

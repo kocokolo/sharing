@@ -11,6 +11,10 @@ body {
     top: 0;
 }
 
+.bgdefault {
+    background-image: url(../img/5.jpg);
+}
+
 #container .img {
     position: absolute;
     cursor: pointer;
@@ -28,7 +32,7 @@ body {
 #container .img.piece {
     border: 1px solid #ffffff;
     box-shadow: 0 0 2px black;
-    background-image: none!important;
+    background-image: none !important;
 }
 
 #container .img span {

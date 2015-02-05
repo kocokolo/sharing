@@ -10,7 +10,7 @@
                 // detect the io
                 if (typeof(io) !== "undefined") {
                     var ws='http://' + server_ip + ':' + server_port + "/" + eventns;
-                    console.info(ws)
+                    //console.info(ws)
                     window.mysocket = io.connect(ws);
                     window.setTimeout(function () {
                         $(window).trigger("socket_ready", mysocket);

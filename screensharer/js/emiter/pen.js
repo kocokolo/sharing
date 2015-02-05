@@ -1,6 +1,7 @@
 (function ($) {
     $(window).on("socket_ready", function () {
-        var supportTouch = "ontouchend" in document;
+        var supportTouch = /(android)|(iphone)/i.test(navigator.userAgent);
+
         var $document = $(document),
             touchStartEvent = supportTouch ? "touchstart" : "mousedown",
             touchStopEvent = supportTouch ? "touchend" : "mouseup",
