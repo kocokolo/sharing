@@ -9,35 +9,40 @@
     var button = document.querySelector('#makeitso');
 
     button.addEventListener('click', function (e) {
-        c.save();
         clear();
-        growtree(e);
-        c.restore();
+        c.globalAlpha = 0.3;
+        growtree(true);
+        growtree(false);
+        c.globalAlpha = 1;
     }, false);
 
     function clear() {
         c.save();
-        c.clearRect(0, 0, canvas.width , canvas.height );
+        c.clearRect(0, 0, canvas.width, canvas.height);
         c.restore();
     }
 
-    function growtree(e) {
-        bushy = false;
+    function growtree(dir) {
+        c.save();
         generation = 0;
-        maxgeneration = 10;
+        maxgeneration = 11;
         if (maxgeneration > 0 && maxgeneration < 14) {
-            c.translate(canvas.width / 2, canvas.height - 10);
+            if (dir) {
+                c.translate(canvas.width - 10, canvas.height);
+            } else {
+                c.translate(10, canvas.height);
+            }
             c.scale(0.7, 0.7);
             branch(-Math.PI / 2);
         } else {
             alert('!');
         }
-        if (e) {
-            e.preventDefault();
-        }
+        c.restore();
     }
 
     function branch(angle) {
+        var bushy = false;
+
         generation++;
         c.save();
         c.strokeStyle = "hsl(" + generation * 10 + ", 100%,50%)";
@@ -69,9 +74,9 @@
                 branch(randomRange(-Math.PI / 4, 0));
                 branch(randomRange(0, Math.PI / 4));
             } else {
-                c.fillStyle = 'green';
+                c.fillStyle = 'pink';
                 c.beginPath();
-                c.arc(0, 0, 20, 0, Math.PI * 2, true);
+                c.arc(0, 0, 30, 0, Math.PI * 2, true);
                 c.fill();
             }
         }

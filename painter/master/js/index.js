@@ -78,6 +78,10 @@
             columnindex = 0;
             rowindex++;
         }
+        // 达到了最大数量
+        if (rowindex == 4) {
+            mysocket.emit("i am full");
+        }
     }
 
     function clickHandle(e) {
