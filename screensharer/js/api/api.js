@@ -22,7 +22,7 @@ function loadScript(url, callback) {
     var api_host = window.api_host;
     var libsrc = api_host + '/_module/jquery-1.11.1.min.js?t=_' + t;
     var utilsrc = api_host + '/_module/utils.js?t=_' + t;
-    var socketsrc = api_host + '/io/client.js?t=_' + t;
+    var socketsrc = api_host + '/client/client.js?t=_' + t;
     var pensrc = api_host + '/screensharer/js/emiter/pen.js?t=_' + t;
     var drawersrc = api_host + '/screensharer/js/receiver/drawer.js?t=_' + t;
     loadScript(libsrc, function () {

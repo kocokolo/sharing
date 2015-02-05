@@ -4,26 +4,30 @@
     <meta charset="UTF-8">
     <title></title>
     <style>
-        body{
+        body {
             font-size: 16px;
         }
     </style>
 </head>
 <body>
-<p style="color: blue;font-size:12px;">拷贝一下代码到浏览器输入框，先别回车，先检查一下~</p>
+<h3>STEP</h3>
+<p style="color: blue;font-size:12px;">1:打开要共享的网页,如 family.baidu.com </p>
+<p><img src="./img/browser_address.png"></p>
+<p style="color: blue;font-size:12px;">2：拷贝以下代码到浏览器输入框</p>
 <script>
     function getDrawerApi() {
         return ['<b>javascript:</b>(function(){',
             '   window.api_host="http://' + window.location.host + "\";",
-            '   window.api_ip="' + window.location.hostname+ "\";",
+            '   window.api_ip="' + window.location.hostname + "\";",
             '   window.api_port="' + window.location.port + "\";",
             '   var s = document.createElement("script");',
             '   s.src = api_host+"/screensharer/js/api/api.js";',
             '   document.body.appendChild(s);',
-            '})();'].join("").replace(/\r/,"");
+            '})();'].join("").replace(/\r/, "");
     }
     document.write(getDrawerApi())
 </script>
-<p style="color: blue;font-size:12px;"><b>注意：</b>“javascript:”前缀浏览器可能处于安全考虑会自动过滤掉，请检查并手工加上。</p>
+<p style="color: blue;font-size:12px;">3:<b style="color:red">注意检查</b>“javascript:”前缀。浏览器可能处于安全考虑会自动过滤掉，请手工加上，然后回车吧~</p>
+<p style="color: blue;font-size:12px;">如果见到页面晃动了几下就代表脚本注入成功。</p>
 </body>
 </html>
