@@ -13,7 +13,6 @@ function createStyle(content) {
     (document.head || document.documentElement).appendChild(node);
 }
 
-
 function loadScript(url, callback) {
     var node = document.createElement('script');
     node.onload = node.onreadystatechange = function () {
@@ -32,6 +31,8 @@ function loadScript(url, callback) {
     node.src = url;
     (document.head || document.documentElement).appendChild(node);
 }
+
+
 window.console = window.console || {
     log: function () {
     }

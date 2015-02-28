@@ -5,17 +5,26 @@
     <title></title>
     <meta name="viewport" content="width=320.1,minimum-scale=1.0,maximum-scale=1.0"/>
     <link rel="stylesheet" href="./css/canvas.css"/>
+    <link rel="stylesheet" href="./css/tool.css"/>
 </head>
 <body>
 <div id="menu">
     <h2>操作</h2>
+
     <div class="tools">
         <div class="options">
             <label for="cbxMoveMode">鼠标跟随:</label>
             <input id="cbxMoveMode" title="选中后，点一下鼠标开始，再点一下结束" type="checkbox"/>
         </div>
+
+        <div class="options">
+            <label for="cbxMoveMode">鼠标跟随:</label>
+            <input id="makeitso" type="button" />
+        </div>
     </div>
+
     <h2>画笔颜色</h2>
+
     <div class="tools">
         <div class="button red" data-color="red" title="">
             <div></div>
@@ -44,21 +53,35 @@
         <div class="clear"></div>
     </div>
     <div class="options">
-        <input id="makeitso" type="button" value="随机背景" title="为了保证可以多次随机，会先清理"/>
-    </div>
-    <div class="options">
         <input type="button" id="btnsave" value="提交"/>
     </div>
 </div>
+<div  class="canvas">
+    <canvas id="smartdrawer-canvas">
 
-<canvas id="smartdrawer-canvas">
+    </canvas>
+    <div class='toolcon btn-group'>
+        <div class='pcbtn2'>
+            <div class='btn open'><i class='icon-folder-open'></i></div>
+            <input type='file' class='pcbtninput'/></div>
+        <div class='pcbtn2 btn-group' style='margin-left:5px;'>
+            <div class='btn rotateleft' title='rotate left'><i class='icon-rotate-left'></i></div>
+            <div class='btn rotateright' title='rotate right'><i class='icon-rotate-right'></i></div>
+            <div class='btn zoomin' title='zoom in'><i class='icon-zoom-in'></i></div>
+            <div class='btn zoomout' title='zoom out'><i class='icon-zoom-out'></i></div>
+            <div class='btn download' title='download file'><i class='icon-file-text'></i></div>
+            <div class='btn reset' title='reset'><i class='icon-refresh'></i></div>
+            <div class='btn redo' title='redo'><i class='icon-mail-reply'></i></div>
+        </div>
+    </div>
+</div>
 
-</canvas>
 <script src="/_module/jquery-1.11.1.min.js" type="text/javascript"></script>
 <script src="/_module/utils.js" type="text/javascript"></script>
 <script src="/client/client.js" type="text/javascript"></script>
 <script src="./js/pen.js" type="text/javascript"></script>
 <script src="./js/drawer.js" type="text/javascript"></script>
 <script src="./js/tree.js" type="text/javascript"></script>
+<script src="./js/main.js" type="text/javascript"></script>
 </body>
 

@@ -1,11 +1,10 @@
 (function () {
     var maxgeneration = 10,
         counter = 0,
-        canvas = document.querySelector('canvas'),
-        c = canvas.getContext('2d'),
         generation = 0;
 
-
+    var canvas = document.getElementById('smartdrawer-canvas');
+    var c = canvas.getContext("2d");
     var button = document.querySelector('#makeitso');
 
     button.addEventListener('click', function (e) {
@@ -15,6 +14,7 @@
         growtree(false);
         c.globalAlpha = 1;
     }, false);
+
 
     function clear() {
         c.save();
@@ -34,8 +34,6 @@
             }
             c.scale(0.7, 0.7);
             branch(-Math.PI / 2);
-        } else {
-            alert('!');
         }
         c.restore();
     }

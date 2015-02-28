@@ -6,6 +6,7 @@ $(document).ready(function () {
         touchMoveEvent = supportTouch ? "touchmove" : "mousemove";
     var cc = document.getElementById("cbxMoveMode");
     var isplaying = false;
+
     window.setTimeout(function () {
         $("canvas").on(touchStartEvent + " " + touchMoveEvent + " " + touchStopEvent, function (event) {
             if (cc.checked) {

@@ -23,7 +23,7 @@ div.clear {
 }
 
 /*cavas*/
-canvas {
+.canvas {
     background-color: #ffffff;
     position: absolute;
 
@@ -142,7 +142,7 @@ div.options {
     padding-top: 5px;
 }
 
-input[type="button"] {
+input {
     width: 100%;
     height: 30px;
 }
@@ -179,6 +179,16 @@ input[type="button"] {
     background-color: #000000;
 }
 
+
+input[type="range"] {
+    -webkit-appearance: none;
+
+    -webkit-box-shadow: 0 1px 0 0px #424242,
+    0 1px 0 #060607 inset,
+    0px 2px 10px 0px black inset,
+    1px 0px 2px rgba(0, 0, 0, 0.4) inset,
+    0 0px 1px rgba(0, 0, 0, 0.6) inset;
+}
 
 
 
