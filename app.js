@@ -16,5 +16,6 @@
     require('./server/screensharer.js').init(sio);
 
     server.listen(port);
+
     console.log("app start success");
 }).call(this);
