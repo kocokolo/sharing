@@ -9,11 +9,14 @@ var maxgeneration,
 function init() {
     // "画板"
     canvas = document.getElementById('demo-canvas');
+    //设置画板大小-实际图片大小
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
-
     // "画笔"
     c = canvas.getContext("2d");
+    //globalCompositeOperation 属性设置或返回如何将一个源（新的）图像绘制到目标（已有的）的图像上。
+    //源图像 = 您打算放置到画布上的绘图。
+    //目标图像 = 您已经放置在画布上的绘图。
     c.globalCompositeOperation = "lighter";
 }
 
@@ -24,6 +27,7 @@ function init() {
 function drawtree(gens,scale) {
     generation = 0;
     maxgeneration = gens;//树杈个数
+
     c.save();
     c.translate(canvas.width / 2, canvas.height);
     c.scale(scale,scale);
@@ -59,14 +63,14 @@ function drawbranch(angle) {
 
     if (+generation === +maxgeneration) {// 达到顶点
         if (random(0, 1) > 0.5) {
-            // 画个花朵
+            // 画叶子
             drawbranch(random(0, Math.PI / 4));
             drawbranch(random(-Math.PI / 4, 0));
             drawbranch(random(0, Math.PI / 4));
             drawbranch(random(-Math.PI / 4, 0));
             drawbranch(random(0, Math.PI / 4));
         } else {
-            // 画个果实
+            // 画果实
             c.fillStyle = 'pink';
             c.beginPath();
             c.arc(0, 0, 30, 0, Math.PI * 2, true);
