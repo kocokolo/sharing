@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>试试Canvas吧~</title>
+    <style>
+        .container {
+            text-align: center;;
+        }
+
+        canvas {
+            display: inline-block;
+        }
+
+        input[type="button"] {
+            width: 200px;
+            height: 30px;
+            -webkit-appearance: normal;
+        }
+
+        .tip {
+            position: fixed;
+            top: 0px;
+            right: 0px;
+            padding:5px;
+            height: 20px;
+            line-height: 20px;;
+            background-color: lightblue;
+            white-space: nowrap;
+            font-size: 12px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+<div class="tip" id="divTip">
+
+</div>
+<div class="container">
+    <canvas id="demo-canvas" width="600" height="400" style="border:1px solid lightblue;">
+    </canvas>
+    <br>
+<textarea rows="5" style="width: 600px;" id="txtCode">
+
+</textarea>
+    <br>
+    <input type="button" value="试试吧" id="btnDoIt">
+</div>
+<script>
+    var btn = document.getElementById("btnDoIt");
+    var canvas = document.getElementById('demo-canvas');
+    var tip = document.getElementById('divTip');
+    var ctx = canvas.getContext("2d");
+    var txtarea = document.getElementById("txtCode");
+    btn.onclick = function () {
+        var val = txtarea.value;
+        try {
+            eval(val);
+            tip.innerText="done"+Math.random();
+        } catch (e) {
+            tip.innerText = "error:" + (e.message);
+        }
+    }
+
+</script>
+
+</body>
+</html>
+
