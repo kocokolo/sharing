@@ -5,18 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
     <title>Lottery Demo</title>
     <style type="text/css">
-        body {
-            height: 1000px;
-        }
 
         #lotteryContainer {
             position: relative;
-            width: 300px;
-            height: 100px;
         }
 
         #drawPercent {
             color: #F60;
+        }
+
+        #canvasBk {
+            width: 100%;
+            height: auto;
+            position: absolute;
+            z-index: 1;
+            top: 0px;
+            left: 0px;
+        }
+
+        #canvasFe {
+            width: 100%;
+            height: auto;
+            position: absolute;
+            z-index: 2;
+            top: 0px;
+            left: 0px;
         }
     </style>
 </head>
@@ -24,22 +37,25 @@
 <button id="freshBtn">刷新彩票</button>
 <label>已刮开 <span id="drawPercent">0%</span> 区域。</label>
 
-<div id="lotteryContainer"></div>
-<script>function Lottery(id, cover, coverType, width, height, drawPercentCallback) {
+<div id="lotteryContainer">
+    <canvas id="canvasFe">
+
+    </canvas>
+    <canvas id="canvasBk">
+
+    </canvas>
+
+</div>
+<script>function Lottery(id, options) {
     this.conId = id;
     this.conNode = document.getElementById(this.conId);
-    this.cover = cover;
-    this.coverType = coverType;
-    this.background = null;
-    this.backCtx = null;
-    this.mask = null;
-    this.maskCtx = null;
-    this.lottery = null;
-    this.lotteryType = 'image';
-    this.width = width || 300;
-    this.height = height || 100;
-    this.clientRect = null;
-    this.drawPercentCallback = drawPercentCallback;
+    this.cover = options.cover;
+    this.coverType = options.coverType;
+    this.background = options.background;
+    this.mask = options.mask;
+    this.width = options.width || 300;
+    this.height = options.height || 100;
+    this.drawPercentCallback = options.drawPercentCallback;
 }
 
 Lottery.prototype = {
@@ -50,7 +66,7 @@ Lottery.prototype = {
         }
         return ele;
     },
-    getTransparentPercent: function(ctx, width, height) {
+    getTransparentPercent: function (ctx, width, height) {
         var imgData = ctx.getImageData(0, 0, width, height),
             pixles = imgData.data,
             transPixs = [];
@@ -60,7 +76,7 @@ Lottery.prototype = {
                 transPixs.push(i);
             }
         }
-        return (transPixs.length / (pixles.length / 4) * 100).toFixed(2);
+        return (transPixs.length / (pixles.length / 4) * 100);
     },
     resizeCanvas: function (canvas, width, height) {
         canvas.width = width;
@@ -73,7 +89,7 @@ Lottery.prototype = {
         radgrad.addColorStop(0, 'rgba(0,0,0,0.6)');
         radgrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
         this.maskCtx.fillStyle = radgrad;
-        this.maskCtx.arc(x, y, 30, 0, Math.PI * 2, true);
+        this.maskCtx.arc(x, y, 20, 0, Math.PI * 2, true);
         this.maskCtx.fill();
         if (this.drawPercentCallback) {
             this.drawPercentCallback.call(null, this.getTransparentPercent(this.maskCtx, this.width, this.height));
@@ -83,19 +99,19 @@ Lottery.prototype = {
         var _this = this;
         var device = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
         var clickEvtName = device ? 'touchstart' : 'mousedown';
-        var moveEvtName = device? 'touchmove': 'mousemove';
+        var moveEvtName = device ? 'touchmove' : 'mousemove';
         if (!device) {
             var isMouseDown = false;
-            document.addEventListener('mouseup', function(e) {
+            document.addEventListener('mouseup', function (e) {
                 isMouseDown = false;
             }, false);
         } else {
-            document.addEventListener("touchmove", function(e) {
+            document.addEventListener("touchmove", function (e) {
                 if (isMouseDown) {
                     e.preventDefault();
                 }
             }, false);
-            document.addEventListener('touchend', function(e) {
+            document.addEventListener('touchend', function (e) {
                 isMouseDown = false;
             }, false);
         }
@@ -105,7 +121,7 @@ Lottery.prototype = {
             if (!_this.clientRect) {
                 _this.clientRect = {
                     left: 0,
-                    top:0
+                    top: 0
                 };
             }
             var x = (device ? e.touches[0].clientX : e.clientX) - _this.clientRect.left + docEle.scrollLeft - docEle.clientLeft;
@@ -121,7 +137,7 @@ Lottery.prototype = {
             if (!_this.clientRect) {
                 _this.clientRect = {
                     left: 0,
-                    top:0
+                    top: 0
                 };
             }
             var x = (device ? e.touches[0].clientX : e.clientX) - _this.clientRect.left + docEle.scrollLeft - docEle.clientLeft;
@@ -131,11 +147,11 @@ Lottery.prototype = {
     },
     drawLottery: function () {
         this.background = this.background || this.createElement('canvas', {
-            style: 'position:absolute;left:0;top:0;'
-        });
+                style: 'position:absolute;left:0;top:0;'
+            });
         this.mask = this.mask || this.createElement('canvas', {
-            style: 'position:absolute;left:0;top:0;'
-        });
+                style: 'position:absolute;left:0;top:0;'
+            });
 
         if (!this.conNode.innerHTML.replace(/[\w\W]| /g, '')) {
             this.conNode.appendChild(this.background);
@@ -176,13 +192,13 @@ Lottery.prototype = {
             this.drawMask();
         }
     },
-    drawMask: function() {
+    drawMask: function () {
         this.resizeCanvas(this.mask, this.width, this.height);
         if (this.coverType == 'color') {
             this.maskCtx.fillStyle = this.cover;
             this.maskCtx.fillRect(0, 0, this.width, this.height);
             this.maskCtx.globalCompositeOperation = 'destination-out';
-        } else if (this.coverType == 'image'){
+        } else if (this.coverType == 'image') {
             var image = new Image(),
                 _this = this;
             image.onload = function () {
@@ -201,18 +217,19 @@ Lottery.prototype = {
 </script>
 <script>
     window.onload = function () {
-        var lottery = new Lottery('lotteryContainer', '#CCC', 'color', 300, 100, drawPercent);
-        lottery.init('http://www.baidu.com/img/bdlogo.gif', 'image');
-
-        document.getElementById('freshBtn').onclick = function () {
-            drawPercentNode.innerHTML = '0%';
-            lottery.init(getRandomStr(10), 'text');
-        }
-
-        var drawPercentNode = document.getElementById('drawPercent');
+        var lottery = new Lottery('lotteryContainer', {
+            cover: '#CCC',
+            coverType: 'color',
+            width: window.innerWidth,
+            background: document.getElementById("canvasBk"),
+            mask: document.getElementById("canvasFe"),
+            height: (416 / 665 * window.innerWidth),
+            drawPercentCallback: drawPercent
+        });
+        lottery.init('http://timg01.baidu-img.cn/timg?tc&size=b665_416&sec=0&quality=75&cut_x=83&cut_y=0&cut_h=0&cut_w=665&di=c41a384d7c81d8325e2a5ee134e29c18&src=http%3A%2F%2Fb.hiphotos.baidu.com%2Fnews%2Fcrop%253D0%252C192%252C832%252C416%2Fsign%3Dd2efb0accafc1e17e9f0d67177a0da32%2Fcc11728b4710b91259baf144c6fdfc0392452214.jpg', 'image');
 
         function drawPercent(percent) {
-            drawPercentNode.innerHTML = percent + '%';
+            document.getElementById('drawPercent').innerHTML = percent + '%';
         }
     }
 
