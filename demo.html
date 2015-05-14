@@ -14,11 +14,15 @@
 <input type="text" id="txt"/>
 <br />
 <input id="btn" type="button" value="click me" />
-
+<br />
+<div id="divBtn">
+    click me
+</div>
 <script>
 var btn=document.getElementById("btn");
 var txt=document.getElementById("txt");
-btn.onclick=function(){
+var divBtn=document.getElementById("divBtn");
+btn.onclick=divBtn.onclick=function(){
     txt.focus();
 }
 </script>
