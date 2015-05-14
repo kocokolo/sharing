@@ -125,6 +125,8 @@ Lottery.prototype = {
         this.mask.addEventListener("touchmove", function (e) {
             var op=_this.getRelativePosition(e);
             _this.drawPoint(op.x, op.y);
+            e.stopPropagation();
+            e.preventDefault();
         }, false);
     },
     drawLottery: function () {
