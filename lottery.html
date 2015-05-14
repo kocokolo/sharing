@@ -99,9 +99,13 @@ Lottery.prototype = {
         var mouseX, mouseY;
 
         var boundingRect = el.getBoundingClientRect();
+        boundingRect.cx= e.touches[0].clientX ;
+        boundingRect.cy=e.touches[0].clientY ;
+        alert(JSON.stringify(boundingRect));
 
         if (e.touches) {
-            mouseX = e.touches[0].clientX - boundingRect.left;
+            mouseX = e.touches[0].clientX ;
+            - boundingRect.left;
             mouseY = e.touches[0].clientY - boundingRect.top;
         }
         else {
