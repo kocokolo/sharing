@@ -42,7 +42,7 @@ var con=document.getElementById("divContainer");
 btn.onclick=divBtn.onclick=function(){
     var txt=document.createElement("input");
     con.appendChild(txt);
-    txt.focus();
+    setTimeout(function(){txt.focus();},100);
 }
 </script>
 </body>
