@@ -101,7 +101,7 @@ Lottery.prototype = {
         var boundingRect = el.getBoundingClientRect();
         boundingRect.cx= e.touches[0].clientX ;
         boundingRect.cy=e.touches[0].clientY ;
-        alert(JSON.stringify(boundingRect));
+        //alert(JSON.stringify(boundingRect));
 
         if (e.touches) {
             mouseX = e.touches[0].clientX ;
@@ -121,7 +121,7 @@ Lottery.prototype = {
     },
     bindEvent: function () {
         var _this = this;
-        this.mask.addEventListener("touchmove", function (e) {
+        this.mask.addEventListener("touchmove touchstart", function (e) {
             var op = _this.getRelativePosition(e, _this.mask);
             _this.drawPoint(op.x, op.y);
             e.stopPropagation();
