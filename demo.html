@@ -7,13 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta name="format-detection" content="telephone=no"/>
 </head>
-
+<style>
+    #divContainer input{
+        color:red;
+    }
+</style>
 <body>
 
 
 <textarea  id="txt" rows="6">
-    
 </textarea>
+
+<br />
+<div id="divContainer">
+    
+</div>
 <br />
 <input id="btn" type="button" value="click me" />
 <br />
@@ -21,14 +29,19 @@
 <br />
 <br />
 <br />
+
 <div id="divBtn">
     click me
 </div>
+
 <script>
 var btn=document.getElementById("btn");
 var txt=document.getElementById("txt");
 var divBtn=document.getElementById("divBtn");
+var con=document.getElementById("divContainer");
 btn.onclick=divBtn.onclick=function(){
+    var txt=document.createElement("input");
+    con.appendChild(txt);
     txt.focus();
 }
 </script>
