@@ -95,16 +95,14 @@ Lottery.prototype = {
             this.drawPercentCallback.call(null, this.getTransparentPercent(this.maskCtx, this.width, this.height));
         }
     },
-    getRelativePosition:function (evt) {
+    getRelativePosition:function (e,el) {
         var mouseX, mouseY;
-        var e = evt.originalEvent || evt,
-            canvas = evt.currentTarget || evt.srcElement,
-            boundingRect = canvas.getBoundingClientRect();
+
+        var boundingRect = el.getBoundingClientRect();
 
         if (e.touches) {
             mouseX = e.touches[0].clientX - boundingRect.left;
             mouseY = e.touches[0].clientY - boundingRect.top;
-
         }
         else {
             mouseX = e.clientX - boundingRect.left;
@@ -119,11 +117,8 @@ Lottery.prototype = {
     },
     bindEvent: function () {
         var _this = this;
-
-
-
         this.mask.addEventListener("touchmove", function (e) {
-            var op=_this.getRelativePosition(e);
+            var op = _this.getRelativePosition(e, _this.mask);
             _this.drawPoint(op.x, op.y);
             e.stopPropagation();
             e.preventDefault();
